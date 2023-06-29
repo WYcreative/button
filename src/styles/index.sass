@@ -1,0 +1,219 @@
+$button-display: flex !default
+$button-flex-flow: row nowrap !default
+$button-align-items: center !default
+$button-width: fit-content !default
+$button-padding: 8px 16px !default
+$button-margin: 0 !default
+
+$button-font: sans-serif !default
+$button-text-decoration: none !default
+$button-transition: 150ms !default
+
+$button-color: rgb(56, 149, 221) !default
+$button-background: #ff9e2f !default
+$button-border: 2px solid #38a3a5 !default
+$button-border-radius: 6px !default
+
+$button-hover-background: #38a3a5 !default
+$button-hover-border: #ff9e2f !default
+$button-hover-color: #ff9e2f !default
+
+$button-focus-background: #57cc99 !default
+$button-focus-outline: #57cc99 !default
+$button-focus-color: #22577a !default
+
+$button-focusvisible-outline:  1px solid #ffbe0b !default
+
+$button-active-background: #57cc99 !default
+$button-active-border: #57cc99 !default
+$button-active-color: #22577a !default
+
+$button-disabled-background: #8d99ae !default
+$button-disabled-border: #2b2d42 !default
+$button-disabled-color: #fff !default
+
+$link-background: #8d99ae !default
+$link-color: #2b2d42 !default
+$link-border: #ef233c !default
+$link-border-radius: 0 !default
+
+$link-focus-background: #fcbf49 !default
+$link-focus-border: #f77f00 !default
+$link-focus-color: #2d7ae5 !default
+
+$link-hover-background: #f77f00 !default
+$link-hover-border: #d62828 !default
+$link-hover-color: #fcbf49 !default
+
+$link-active-background: #003049 !default
+$link-active-border: #f77f00 !default
+$link-active-color: #fcbf49 !default
+
+=reset
+	:root
+		--button-display: #{$button-display}
+		--button-flex-flow: #{$button-flex-flow}
+		--button-align-items: #{$button-align-items}
+		--button-width: #{$button-width}
+		--button-padding: #{$button-padding}
+		--button-margin: #{$button-margin}
+
+		--button-font: #{$button-font}
+		--button-text-decoration: #{$button-text-decoration}
+		--button-transition: #{$button-transition}
+
+		--button-color: #{$button-color}
+		--button-background: #{$button-background}
+		--button-border: #{$button-border}
+		--button-border-radius: #{$button-border-radius}
+
+		--button-hover-background: #{$button-hover-background}
+		--button-hover-border: #{$button-hover-border}
+		--button-hover-color: #{$button-hover-color}
+
+		--button-focus-background: #{$button-focus-background}
+		--button-focus-outline: #{$button-focus-outline}
+		--button-focus-color: #{$button-focus-color}
+
+		--button-focusvisible-outline: #{$button-focusvisible-outline}
+
+		--button-active-background: #{$button-active-background}
+		--button-active-border: #{$button-active-border}
+		--button-active-color: #{$button-active-color}
+
+		--button-disabled-background: #{$button-disabled-background}
+		--button-disabled-border: #{$button-disabled-border}
+		--button-disabled-color: #{$button-disabled-color}
+
+		--link-background: #{$link-background}
+		--link-color:#{$link-color}
+		--link-border: #{$link-border}
+		--link-border-radius: #{$link-border-radius}
+
+		--link-focus-background: #{$link-focus-background}
+		--link-focus-border: #{$link-focus-border}
+		--link-focus-color: #{$link-focus-color}
+
+		--link-hover-background: #{$link-hover-background}
+		--link-hover-border: #{$link-hover-border}
+		--link-hover-color: #{$link-hover-color}
+
+		--link-active-background: #{$link-active-background}
+		--link-active-border: #{$link-active-border}
+		--link-active-color: #{$link-active-color}
+
+
+=button
+	// BUTTON
+	.button
+		display: var(--button-display)
+		flex-flow: var(--button-flex-flow)
+		align-items: var(--button-align-items)
+		width: var(--button-width)
+		padding: var(--button-padding)
+		margin: var(--button-margin)
+
+		font-family: var(--button-font)
+		text-decoration: var(--button-text-decoration)
+		transition: var(--button-transition)
+
+		color: var(--button-color)
+		background: var(--button-background)
+		border: var(--button-border)
+		border-radius: var(--button-border-radius)
+
+
+		// BUTTON FOCUS
+		&:focus
+			color: var(--button-focus-color)
+			background: var(--button-focus-background)
+			outline: var(--button-focus-outline)
+
+		&:focus-visible
+			outline: var(--button-focusvisible-outline)
+
+		// BUTTON HOVER
+		&:hover
+			background: var(--button-hover-background)
+			border-color: var(--button-hover-border)
+			color: var(--button-hover-color)
+
+		// BUTTON ACTIVE
+		&:active, &:focus
+			background: var(--button-active-background)
+			border-color: var(--button-active-border)
+			color: var(--button-active-color)
+
+
+		// // BUTTON SECONDARY
+		// &--secondary
+		// 	background: var(--button-primary)
+		// 	border: var(--button-border) solid var(--button-primary)
+		// 	border-radius: var(--button-border-radius)
+		// 	color: var(--button-background)
+
+		// 	// BUTTON SECONDARY HOVER
+		// 	&:hover
+		// 		background: var(--button-background)
+		// 		border-color: var(--button-primary)
+		// 		color: var(--button-primary)
+
+
+		// 	// BUTTON SECONDARY ACTIVE
+		// 	&:active
+		// 		background: var(--button-background)
+		// 		border-color: var(--button-secondary)
+		// 		color: var(--button-secondary)
+
+
+		// LINKS
+		@at-root a#{&}
+			// background: var(--link-background)
+			color: var(--link-color)
+			border: var(--link-border)
+			border-radius: var(--link-border-radius)
+
+
+			// LINK FOCUS
+			&:focus
+				outline: var(--link-focus-background)
+				background: var(--link-focus-border)
+				color: var(--link-focus-color)
+
+
+			// LINK HOVER
+			&:hover
+				background: var(--link-hover-border)
+				border: var(--link-hover-border)
+				color: var(--link-hover-color)
+
+
+			// LINK ACTIVE
+			&:active
+				background: var(--link-active-border)
+				border: var(--link-active-border)
+				color: var(--link-active-color)
+
+			// // LINK SECONDARY
+			// &.button--secondary
+			// 	background: unset
+			// 	border: unset
+			// 	color: var(--button-secondary)
+
+			// 	// LINK SECONDARY HOVER
+			// 	&:hover
+			// 		border-color: var(--button-primary)
+			// 		color: var(--button-primary)
+
+
+			// 	// LINK SECONDARY ACTIVE
+			// 	&:active
+			// 		border-color: var(--button-primary)
+			// 		color: var(--button-primary)
+
+
+		// DISABLED
+		&[disabled]
+			background: var(--button-disabled-background)
+			border-color: var(--button-disabled-border)
+			color: var(--button-disabled-color)

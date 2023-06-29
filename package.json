@@ -42,7 +42,9 @@
     "url": "git+https://github.com/wycreative/button"
   },
   "homepage": "https://wycreative.github.io/button",
-  "dependencies": {},
+  "dependencies": {
+    "@wycreative/symbol": "^0.1.1"
+  },
   "devDependencies": {
     "browser-sync": "^*",
     "cssnano": "^*",

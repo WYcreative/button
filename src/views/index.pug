@@ -1,0 +1,58 @@
+include ~@wycreative/symbol
+
+//- @pugdoc
+	Creates an button.
+
+	@param {String | Object} options - The button text, or the button options.
+	@param {String} [options.element] - The button HTML element.
+		If not defined, and if `options.element` is not defined either, the `.button` will be a `<button>`.
+	@param {String} options.text - The button text.
+	@param {String} [options.url] - The button url.
+		If set, the `.button` will be an `<a>` regardless of what is defined in `options.element`.
+	@param {Array | String} [options.modifiers = 'primary'] - The `.button` modifier names.
+		The modifiers will be prefixed with `button--`.
+		It accepts an array or a string of space separated modifiers.
+	@param {String} [options.icon] - The ID of the button icon.
+		If not defined, and `options.modifiers` does not include the keyword `icon`, an arrow will appear next to the text.
+
+	@attributes * - The attributes for the `.button` element.
+
+	@returns {HTMLButtonElement | HTMLAnchorElement | HTMLElement} The button instance.
+
+mixin button(options)
+	if typeof options !== 'object' || options === null
+		- throw new TypeError(`The argument \`options\` is not an object. Got a ${typeof options}.`);
+
+	if !(options.url === undefined || typeof options.url === 'string' || options.url instanceof URL)
+		- throw new TypeError(`The argument \`options.url\` is not a valid url. Got a ${typeof options.url}.`);
+
+	if !(options.element === undefined || typeof options.element === 'string')
+		- throw new TypeError(`The argument \`options.element\` is not a string. Got a ${typeof options.element}.`);
+
+	if options.element && options.url
+		console.warn('Both arguments element and url can not be defined at the same time.')
+
+	each item of ['icon', 'arrow']
+
+		if !(options[item] === undefined || (typeof options[item] === 'object' && options[item] !== null))
+			- throw new TypeError(`The argument \`options.icon\` is not an object. Got a ${typeof options[item]}.`);
+
+			if !(options[item].id === undefined || typeof options[item].id === 'string')
+				- throw new TypeError(`The argument \`options.${item}.id\` is not a string. Got a ${typeof options[item].id}.`);
+
+			if !(options[item].size === undefined || typeof options[item].size === 'number')
+				- throw new TypeError(`The argument \`options.${item}.size\` is not a string. Got a ${typeof options[item].size}.`);
+
+	if typeof options.text !== 'string'
+		- throw new TypeError(`The argument \`options.text\` is not a string. Got a ${typeof options.text}.`);
+
+	#{options.url ? 'a' : options.element || 'button'}.button(
+		href=options.url)&attributes(attributes)
+		if options.icon
+			+symbol(options.icon.id, options.icon.size).button__arrow-icon
+
+		span.button__text= options.text
+
+		if options.arrow
+			.button__arrow
+				+symbol(options.arrow.id, options.arrow.size).button__arrow-icon

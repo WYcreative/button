@@ -3,4 +3,20 @@ extends _layouts/base
 
 
 block body
-	h1 Welcome to the Button example!
+	- __symbol_defaults.path = '/examples/assets/images'
+	- __symbol_defaults.file = 'symbols'
+
+	+button({text:'Button'})
+
+	+button({
+		text: 'Link',
+		url: '#',
+		icon: {
+			size: '24',
+			id: 'dog',
+		},
+	})
+
+	+button({
+		text: 'Button Disabled',
+	})(disabled)
