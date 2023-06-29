@@ -1,0 +1,124 @@
+{
+  "name": "@wycreative/button",
+  "version": "0.0.0",
+  "description": "Create a button easily.",
+  "keywords": [
+    "button",
+    "component",
+    "design system",
+    "ui kit"
+  ],
+  "author": "WYcreative Engineering Team",
+  "license": "ISC",
+  "type": "module",
+  "files": [
+    "./src/**"
+  ],
+  "exports": {
+    ".": {
+      "sass": "./src/styles/index.sass",
+      "pug": "./src/views/index.pug"
+    },
+    "./*": {
+      "sass": "./src/styles/*",
+      "pug": "./src/views/*"
+    }
+  },
+  "engines": {
+    "gulp-cli": ">=2.3",
+    "node": ">=18.16",
+    "npm": ">=9.5"
+  },
+  "scripts": {
+    "start": "gulp",
+    "serve": "gulp serve",
+    "test": "xo",
+    "dist": "gulp dist",
+    "clean": "gulp clean",
+    "release": "np"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wycreative/button"
+  },
+  "homepage": "https://wycreative.github.io/button",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^*",
+    "cssnano": "^*",
+    "del": "^*",
+    "glob-parent": "^*",
+    "globby": "^*",
+    "gulp": "^*",
+    "gulp-imagemin": "^*",
+    "gulp-plumber": "^*",
+    "gulp-postcss": "^*",
+    "gulp-pug": "^*",
+    "gulp-rename": "^*",
+    "gulp-sass": "^*",
+    "gulp-svgstore": "^*",
+    "gulp-tap": "^*",
+    "jsdom": "^*",
+    "np": "^*",
+    "postcss": "^*",
+    "postcss-preset-env": "^*",
+    "pug-walk": "^*",
+    "read-pkg-up": "^*",
+    "resolve.exports": "^*",
+    "sass": "^*",
+    "xo": "^*"
+  },
+  "browserslist": [
+    "defaults and last 2 years",
+    "not op_mob >= 0"
+  ],
+  "babel": {
+    "presets": [
+      [
+        "@babel/env",
+        {
+          "modules": false
+        }
+      ]
+    ],
+    "only": [
+      "./@(config|data|src)/**"
+    ]
+  },
+  "xo": {
+    "envs": [
+      "browser",
+      "node"
+    ],
+    "rules": {
+      "no-multiple-empty-lines": [
+        "warn",
+        {
+          "max": 3
+        }
+      ],
+      "import/order": [
+        "error",
+        {
+          "newlines-between": "always"
+        }
+      ],
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "info",
+            "warn",
+            "error"
+          ]
+        }
+      ]
+    }
+  },
+  "np": {
+    "message": "DIST - v%s"
+  },
+  "genesis": {
+    "version": "2.3.0"
+  }
+}
