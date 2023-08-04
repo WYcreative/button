@@ -5,18 +5,34 @@ extends _layouts/base
 block body
 	- __symbol_defaults.path = '/examples/assets/images'
 	- __symbol_defaults.file = 'symbols'
-
-	+button({text:'Button'})
+	- __symbol_defaults.width = 16
 
 	+button({
-		text: 'Link',
-		url: '#',
-		icon: {
-			size: '24',
-			id: 'dog',
+		text: 'Button',
+		icons: {
+			start: {
+				id: 'dog',
+			},
 		},
 	})
 
 	+button({
-		text: 'Button Disabled',
-	})(disabled)
+		text: 'Link',
+		url: '#',
+		icons: {
+			start: {
+				id: 'dog',
+				width: 24,
+			},
+			end: {
+				id: 'dog',
+				width: 24,
+			},
+		},
+	})
+
+	+button({
+		text: 'Disabled Button',
+	})(
+		disabled
+	)

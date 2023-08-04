@@ -1,58 +1,72 @@
 include ~@wycreative/symbol
 
-//- @pugdoc
-	Creates an button.
 
-	@param {String | Object} options - The button text, or the button options.
-	@param {String} [options.element] - The button HTML element.
-		If not defined, and if `options.element` is not defined either, the `.button` will be a `<button>`.
+
+- const __button_defaults = {}
+
+
+
+//- @pugdoc
+	Creates a button.
+
+	@param {Object} options - The button options.
+	@param {String} [options.element] - The button HTML tag.
+		If not defined, it fallbacks to `button`.
+		If `options.url` is defined, this options will not have any effect and will be always `a`.
 	@param {String} options.text - The button text.
 	@param {String} [options.url] - The button url.
-		If set, the `.button` will be an `<a>` regardless of what is defined in `options.element`.
-	@param {Array | String} [options.modifiers = 'primary'] - The `.button` modifier names.
-		The modifiers will be prefixed with `button--`.
-		It accepts an array or a string of space separated modifiers.
-	@param {String} [options.icon] - The ID of the button icon.
-		If not defined, and `options.modifiers` does not include the keyword `icon`, an arrow will appear next to the text.
+		If defined, the button will be an `<a>` regardless of what is defined in `options.element`.
+	@param {Object} [options.icon] - The button icon options.
+		It will use the same options as the symbol.
+	@param {Object} [options.icon] - The button icon options.
+		It will use the same options as the symbol.
 
 	@attributes * - The attributes for the `.button` element.
 
 	@returns {HTMLButtonElement | HTMLAnchorElement | HTMLElement} The button instance.
 
 mixin button(options)
+
+	//- Assign defaults.
+	//- ----------------------------------------------------------------------------
+	- options = Object.assign({}, __button_defaults, options)
+
+
+	//- Validate arguments and properties.
+	//- ----------------------------------------------------------------------------
 	if typeof options !== 'object' || options === null
-		- throw new TypeError(`The argument \`options\` is not an object. Got a ${typeof options}.`);
+		- throw new TypeError(`[Button Mixin]\n  The argument 'options' only accepts objects. Got the ${typeof options} \`${options}\`.`);
 
 	if !(options.url === undefined || typeof options.url === 'string' || options.url instanceof URL)
-		- throw new TypeError(`The argument \`options.url\` is not a valid url. Got a ${typeof options.url}.`);
+		- throw new TypeError(`[Button Mixin]\n  The property 'options.url' only accepts strings or URLs. Got the ${typeof options.url} \`${options.url}\`.`);
 
 	if !(options.element === undefined || typeof options.element === 'string')
-		- throw new TypeError(`The argument \`options.element\` is not a string. Got a ${typeof options.element}.`);
+		- throw new TypeError(`[Button Mixin]\n  The property 'options.element' only accepts strings. Got the ${typeof options.element} \`${options.element}\`.`);
 
 	if options.element && options.url
-		console.warn('Both arguments element and url can not be defined at the same time.')
+		- console.warn(`[Button Mixin]\n  The property 'options.element' is ignored when 'options.url' is defined. Its value will be forced to be \`a\` instead of the defined \`${options.element}\`.`)
 
-	each item of ['icon', 'arrow']
+	if !(options.icons === undefined || (typeof options.icons === 'object' && options !== null))
+		- throw new TypeError(`[Button Mixin]\n  The property 'options.icons' only accepts objects. Got the ${typeof options.icons} \`${options.icons}\`.`);
 
-		if !(options[item] === undefined || (typeof options[item] === 'object' && options[item] !== null))
-			- throw new TypeError(`The argument \`options.icon\` is not an object. Got a ${typeof options[item]}.`);
-
-			if !(options[item].id === undefined || typeof options[item].id === 'string')
-				- throw new TypeError(`The argument \`options.${item}.id\` is not a string. Got a ${typeof options[item].id}.`);
-
-			if !(options[item].size === undefined || typeof options[item].size === 'number')
-				- throw new TypeError(`The argument \`options.${item}.size\` is not a string. Got a ${typeof options[item].size}.`);
+	if options.icons
+		each item of ['start', 'end']
+			if !(options.icons[item] === undefined || (typeof options.icons[item] === 'object' && options.icons[item] !== null))
+				- throw new TypeError(`[Button Mixin]\n  The property \`options.icons.${item}\` only accepts objects. Got the ${typeof options.icons[item]} \`${options.icons[item]}\`.`);
 
 	if typeof options.text !== 'string'
-		- throw new TypeError(`The argument \`options.text\` is not a string. Got a ${typeof options.text}.`);
+		- throw new TypeError(`[Button Mixin]\n  The property \`options.text\` only accepts strings. Got the ${typeof options.text} \`${options.text}\`.`);
 
+
+	//- Output result.
+	//- ----------------------------------------------------------------------------
 	#{options.url ? 'a' : options.element || 'button'}.button(
-		href=options.url)&attributes(attributes)
-		if options.icon
-			+symbol(options.icon.id, options.icon.size).button__arrow-icon
+		href=options.url
+	)&attributes(attributes)
+		if options.icons && options.icons.start && options.icons.start.id
+			+symbol(options.icons.start).button__icon.button__icon--start
 
 		span.button__text= options.text
 
-		if options.arrow
-			.button__arrow
-				+symbol(options.arrow.id, options.arrow.size).button__arrow-icon
+		if options.icons && options.icons.end && options.icons.end.id
+			+symbol(options.icons.end).button__icon.button__icon--end

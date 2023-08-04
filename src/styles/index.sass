@@ -1,219 +1,362 @@
-$button-display: flex !default
-$button-flex-flow: row nowrap !default
-$button-align-items: center !default
-$button-width: fit-content !default
-$button-padding: 8px 16px !default
-$button-margin: 0 !default
+@use "sass:color"
+@use "sass:map"
+@use "sass:meta"
 
-$button-font: sans-serif !default
-$button-text-decoration: none !default
-$button-transition: 150ms !default
 
-$button-color: rgb(56, 149, 221) !default
-$button-background: #ff9e2f !default
-$button-border: 2px solid #38a3a5 !default
-$button-border-radius: 6px !default
 
-$button-hover-background: #38a3a5 !default
-$button-hover-border: #ff9e2f !default
-$button-hover-color: #ff9e2f !default
+// Base.
+// -----------------------------------------------------------------------------
+$width: fit-content !default
+$padding: 8px 16px !default
+$margin: 0 !default
+$gap: 8px !default
+$text-decoration: none !default
+$transition: 150ms !default
+$color: inherit !default
+$background: #ccc !default
+$outline-width: 0px !default
+$outline-color: blue !default
+$outline-offset: 0 !default
+$border-width: null !default
+$border-color: null !default
+$border-radius: null !default
+$cursor: null !default
 
-$button-focus-background: #57cc99 !default
-$button-focus-outline: #57cc99 !default
-$button-focus-color: #22577a !default
+$variables: ()
 
-$button-focusvisible-outline:  1px solid #ffbe0b !default
+$variables: map.set($variables, width, $width)
+$variables: map.set($variables, padding, $padding)
+$variables: map.set($variables, margin, $margin)
+$variables: map.set($variables, gap, $gap)
+$variables: map.set($variables, text-decoration, $text-decoration)
+$variables: map.set($variables, transition, $transition)
+$variables: map.set($variables, color, $color)
+$variables: map.set($variables, background, $background)
+$variables: map.set($variables, outline-width, $outline-width)
+$variables: map.set($variables, outline-color, $outline-color)
+$variables: map.set($variables, outline-offset, $outline-offset)
+$variables: map.set($variables, border-width, $border-width)
+$variables: map.set($variables, border-color, $border-color)
+$variables: map.set($variables, border-radius, $border-radius)
+$variables: map.set($variables, cursor, $cursor)
 
-$button-active-background: #57cc99 !default
-$button-active-border: #57cc99 !default
-$button-active-color: #22577a !default
 
-$button-disabled-background: #8d99ae !default
-$button-disabled-border: #2b2d42 !default
-$button-disabled-color: #fff !default
+// Hover State.
+// -----------------------------------------------------------------------------
+$hover-width: null !default
+$hover-padding: null !default
+$hover-margin: null !default
+$hover-gap: null !default
+$hover-text-decoration: null !default
+$hover-transition: null !default
+$hover-color: null !default
+$hover-background: color.scale($background, $lightness: 10%) !default
+$hover-outline-width: null !default
+$hover-outline-color: null !default
+$hover-outline-offset: null !default
+$hover-border-width: null !default
+$hover-border-color: null !default
+$hover-border-radius: null !default
+$hover-cursor: null !default
 
-$link-background: #8d99ae !default
-$link-color: #2b2d42 !default
-$link-border: #ef233c !default
-$link-border-radius: 0 !default
+$hover-variables: ()
 
-$link-focus-background: #fcbf49 !default
-$link-focus-border: #f77f00 !default
-$link-focus-color: #2d7ae5 !default
+$hover-variables: map.set($hover-variables, width, $hover-width)
+$hover-variables: map.set($hover-variables, padding, $hover-padding)
+$hover-variables: map.set($hover-variables, margin, $hover-margin)
+$hover-variables: map.set($hover-variables, gap, $hover-gap)
+$hover-variables: map.set($hover-variables, text-decoration, $hover-text-decoration)
+$hover-variables: map.set($hover-variables, transition, $hover-transition)
+$hover-variables: map.set($hover-variables, color, $hover-color)
+$hover-variables: map.set($hover-variables, background, $hover-background)
+$hover-variables: map.set($hover-variables, outline-width, $hover-outline-width)
+$hover-variables: map.set($hover-variables, outline-color, $hover-outline-color)
+$hover-variables: map.set($hover-variables, outline-offset, $hover-outline-offset)
+$hover-variables: map.set($hover-variables, border-width, $hover-border-width)
+$hover-variables: map.set($hover-variables, border-color, $hover-border-color)
+$hover-variables: map.set($hover-variables, border-radius, $hover-border-radius)
+$hover-variables: map.set($hover-variables, cursor, $hover-cursor)
 
-$link-hover-background: #f77f00 !default
-$link-hover-border: #d62828 !default
-$link-hover-color: #fcbf49 !default
 
-$link-active-background: #003049 !default
-$link-active-border: #f77f00 !default
-$link-active-color: #fcbf49 !default
+// Focus State.
+// -----------------------------------------------------------------------------
+$focus-width: null !default
+$focus-padding: null !default
+$focus-margin: null !default
+$focus-gap: null !default
+$focus-text-decoration: null !default
+$focus-transition: null !default
+$focus-color: null !default
+$focus-background: color.scale($background, $lightness: 20%) !default
+$focus-outline-width: null !default
+$focus-outline-color: null !default
+$focus-outline-offset: null !default
+$focus-border-width: null !default
+$focus-border-color: null !default
+$focus-border-radius: null !default
+$focus-cursor: null !default
 
-=reset
-	:root
-		--button-display: #{$button-display}
-		--button-flex-flow: #{$button-flex-flow}
-		--button-align-items: #{$button-align-items}
-		--button-width: #{$button-width}
-		--button-padding: #{$button-padding}
-		--button-margin: #{$button-margin}
+$focus-variables: ()
 
-		--button-font: #{$button-font}
-		--button-text-decoration: #{$button-text-decoration}
-		--button-transition: #{$button-transition}
+$focus-variables: map.set($focus-variables, width, $focus-width)
+$focus-variables: map.set($focus-variables, padding, $focus-padding)
+$focus-variables: map.set($focus-variables, margin, $focus-margin)
+$focus-variables: map.set($focus-variables, gap, $focus-gap)
+$focus-variables: map.set($focus-variables, text-decoration, $focus-text-decoration)
+$focus-variables: map.set($focus-variables, transition, $focus-transition)
+$focus-variables: map.set($focus-variables, color, $focus-color)
+$focus-variables: map.set($focus-variables, background, $focus-background)
+$focus-variables: map.set($focus-variables, outline-width, $focus-outline-width)
+$focus-variables: map.set($focus-variables, outline-color, $focus-outline-color)
+$focus-variables: map.set($focus-variables, outline-offset, $focus-outline-offset)
+$focus-variables: map.set($focus-variables, border-width, $focus-border-width)
+$focus-variables: map.set($focus-variables, border-color, $focus-border-color)
+$focus-variables: map.set($focus-variables, border-radius, $focus-border-radius)
+$focus-variables: map.set($focus-variables, cursor, $focus-cursor)
 
-		--button-color: #{$button-color}
-		--button-background: #{$button-background}
-		--button-border: #{$button-border}
-		--button-border-radius: #{$button-border-radius}
 
-		--button-hover-background: #{$button-hover-background}
-		--button-hover-border: #{$button-hover-border}
-		--button-hover-color: #{$button-hover-color}
+// Focus-visible State.
+// -----------------------------------------------------------------------------
+$focus-visible-width: null !default
+$focus-visible-padding: null !default
+$focus-visible-margin: null !default
+$focus-visible-gap: null !default
+$focus-visible-text-decoration: null !default
+$focus-visible-transition: null !default
+$focus-visible-color: null !default
+$focus-visible-background: $focus-background !default
+$focus-visible-outline-width: 1px !default
+$focus-visible-outline-color: blue !default
+$focus-visible-outline-offset: 0 !default
+$focus-visible-border-width: null !default
+$focus-visible-border-color: null !default
+$focus-visible-border-radius: null !default
+$focus-visible-cursor: null !default
 
-		--button-focus-background: #{$button-focus-background}
-		--button-focus-outline: #{$button-focus-outline}
-		--button-focus-color: #{$button-focus-color}
+$focus-visible-variables: ()
 
-		--button-focusvisible-outline: #{$button-focusvisible-outline}
+$focus-visible-variables: map.set($focus-visible-variables, width, $focus-visible-width)
+$focus-visible-variables: map.set($focus-visible-variables, padding, $focus-visible-padding)
+$focus-visible-variables: map.set($focus-visible-variables, margin, $focus-visible-margin)
+$focus-visible-variables: map.set($focus-visible-variables, gap, $focus-visible-gap)
+$focus-visible-variables: map.set($focus-visible-variables, text-decoration, $focus-visible-text-decoration)
+$focus-visible-variables: map.set($focus-visible-variables, transition, $focus-visible-transition)
+$focus-visible-variables: map.set($focus-visible-variables, color, $focus-visible-color)
+$focus-visible-variables: map.set($focus-visible-variables, background, $focus-visible-background)
+$focus-visible-variables: map.set($focus-visible-variables, outline-width, $focus-visible-outline-width)
+$focus-visible-variables: map.set($focus-visible-variables, outline-color, $focus-visible-outline-color)
+$focus-visible-variables: map.set($focus-visible-variables, outline-offset, $focus-visible-outline-offset)
+$focus-visible-variables: map.set($focus-visible-variables, border-width, $focus-visible-border-width)
+$focus-visible-variables: map.set($focus-visible-variables, border-color, $focus-visible-border-color)
+$focus-visible-variables: map.set($focus-visible-variables, border-radius, $focus-visible-border-radius)
+$focus-visible-variables: map.set($focus-visible-variables, cursor, $focus-visible-cursor)
 
-		--button-active-background: #{$button-active-background}
-		--button-active-border: #{$button-active-border}
-		--button-active-color: #{$button-active-color}
 
-		--button-disabled-background: #{$button-disabled-background}
-		--button-disabled-border: #{$button-disabled-border}
-		--button-disabled-color: #{$button-disabled-color}
+// Active State.
+// -----------------------------------------------------------------------------
+$active-width: null !default
+$active-padding: null !default
+$active-margin: null !default
+$active-gap: null !default
+$active-text-decoration: null !default
+$active-transition: null !default
+$active-color: null !default
+$active-background: color.scale($background, $lightness: -10%) !default
+$active-outline-width: null !default
+$active-outline-color: null !default
+$active-outline-offset: null !default
+$active-border-width: null !default
+$active-border-color: null !default
+$active-border-radius: null !default
+$active-cursor: null !default
 
-		--link-background: #{$link-background}
-		--link-color:#{$link-color}
-		--link-border: #{$link-border}
-		--link-border-radius: #{$link-border-radius}
+$active-variables: ()
 
-		--link-focus-background: #{$link-focus-background}
-		--link-focus-border: #{$link-focus-border}
-		--link-focus-color: #{$link-focus-color}
+$active-variables: map.set($active-variables, width, $active-width)
+$active-variables: map.set($active-variables, padding, $active-padding)
+$active-variables: map.set($active-variables, margin, $active-margin)
+$active-variables: map.set($active-variables, gap, $active-gap)
+$active-variables: map.set($active-variables, text-decoration, $active-text-decoration)
+$active-variables: map.set($active-variables, transition, $active-transition)
+$active-variables: map.set($active-variables, color, $active-color)
+$active-variables: map.set($active-variables, background, $active-background)
+$active-variables: map.set($active-variables, outline-width, $active-outline-width)
+$active-variables: map.set($active-variables, outline-color, $active-outline-color)
+$active-variables: map.set($active-variables, outline-offset, $active-outline-offset)
+$active-variables: map.set($active-variables, border-width, $active-border-width)
+$active-variables: map.set($active-variables, border-color, $active-border-color)
+$active-variables: map.set($active-variables, border-radius, $active-border-radius)
+$active-variables: map.set($active-variables, cursor, $active-cursor)
 
-		--link-hover-background: #{$link-hover-background}
-		--link-hover-border: #{$link-hover-border}
-		--link-hover-color: #{$link-hover-color}
+// Disabled State.
+// -----------------------------------------------------------------------------
+$disabled-width: null !default
+$disabled-padding: null !default
+$disabled-margin: null !default
+$disabled-gap: null !default
+$disabled-text-decoration: null !default
+$disabled-transition: null !default
+$disabled-color: null !default
+$disabled-background: rgba($background, .5) !default
+$disabled-outline-width: null !default
+$disabled-outline-color: null !default
+$disabled-outline-offset: null !default
+$disabled-border-width: null !default
+$disabled-border-color: null !default
+$disabled-border-radius: null !default
+$disabled-cursor: not-allowed !default
 
-		--link-active-background: #{$link-active-background}
-		--link-active-border: #{$link-active-border}
-		--link-active-color: #{$link-active-color}
+$disabled-variables: ()
 
+$disabled-variables: map.set($disabled-variables, width, $disabled-width)
+$disabled-variables: map.set($disabled-variables, padding, $disabled-padding)
+$disabled-variables: map.set($disabled-variables, margin, $disabled-margin)
+$disabled-variables: map.set($disabled-variables, gap, $disabled-gap)
+$disabled-variables: map.set($disabled-variables, text-decoration, $disabled-text-decoration)
+$disabled-variables: map.set($disabled-variables, transition, $disabled-transition)
+$disabled-variables: map.set($disabled-variables, color, $disabled-color)
+$disabled-variables: map.set($disabled-variables, background, $disabled-background)
+$disabled-variables: map.set($disabled-variables, outline-width, $disabled-outline-width)
+$disabled-variables: map.set($disabled-variables, outline-color, $disabled-outline-color)
+$disabled-variables: map.set($disabled-variables, outline-offset, $disabled-outline-offset)
+$disabled-variables: map.set($disabled-variables, border-width, $disabled-border-width)
+$disabled-variables: map.set($disabled-variables, border-color, $disabled-border-color)
+$disabled-variables: map.set($disabled-variables, border-radius, $disabled-border-radius)
+$disabled-variables: map.set($disabled-variables, cursor, $disabled-cursor)
+
+
+
+/// Generates the `.button` custom properties.
+///
+/// @output The `.button` custom properties.
+
+=custom-properties
+
+	@at-root :root
+		@each $name, $value in $variables
+			@if meta.variable-exists($name) and $value
+				--button-#{$name}: #{$value}
+
+
+		// Hover State.
+		// -----------------------------------------------------------------------------
+		@each $name, $value in $hover-variables
+			@if meta.variable-exists($name) and $value
+				--button-hover-#{$name}: #{$value}
+
+
+		// Focus State.
+		// -----------------------------------------------------------------------------
+		@each $name, $value in $focus-variables
+			@if meta.variable-exists($name) and $value
+				--button-focus-#{$name}: #{$value}
+
+
+		// Focus-visible State.
+		// -----------------------------------------------------------------------------
+		@each $name, $value in $focus-visible-variables
+			@if meta.variable-exists($name) and $value
+				--button-focus-visible-#{$name}: #{$value}
+
+
+		// Active State.
+		// -----------------------------------------------------------------------------
+		@each $name, $value in $active-variables
+			@if meta.variable-exists($name) and $value
+				--button-active-#{$name}: #{$value}
+
+
+		// Disabled State.
+		// -----------------------------------------------------------------------------
+		@each $name, $value in $disabled-variables
+			@if meta.variable-exists($name) and $value
+				--button-disabled-#{$name}: #{$value}
+
+
+
+/// Generates the `.button` styles.
+///
+/// @output The `.button` styles.
 
 =button
-	// BUTTON
+
 	.button
-		display: var(--button-display)
-		flex-flow: var(--button-flex-flow)
-		align-items: var(--button-align-items)
+		display: flex
+		align-items: center
 		width: var(--button-width)
 		padding: var(--button-padding)
 		margin: var(--button-margin)
-
-		font-family: var(--button-font)
+		gap: var(--button-gap)
+		font: inherit
 		text-decoration: var(--button-text-decoration)
-		transition: var(--button-transition)
-
+		@if meta.variable-exists(transition) and $transition
+			transition: var(--button-transition)
 		color: var(--button-color)
 		background: var(--button-background)
-		border: var(--button-border)
-		border-radius: var(--button-border-radius)
+		@if meta.variable-exists(outline-width) and $outline-width and meta.variable-exists(outline-color) and $outline-color
+			outline: var(--button-outline-width) solid var(--button-outline-color)
+				@if meta.variable-exists(outline-offset) and $outline-offset
+					offset: var(--button-outline-offset)
+		@if (meta.variable-exists(border-width) and $border-width) or (meta.variable-exists(border-color) and $border-color)
+			border: if(meta.variable-exists(border-width) and $border-width, var(--button-border-width), null) solid if(meta.variable-exists(border-color) and $border-color, var(--button-border-color), null)
+		@else
+			border: none
+		@if meta.variable-exists(border-radius) and $border-radius
+			border-radius: var(--button-border-radius)
+		@if meta.variable-exists(cursor) and $cursor
+			cursor: var(--button-cursor)
 
 
-		// BUTTON FOCUS
-		&:focus
-			color: var(--button-focus-color)
-			background: var(--button-focus-background)
-			outline: var(--button-focus-outline)
-
-		&:focus-visible
-			outline: var(--button-focusvisible-outline)
-
-		// BUTTON HOVER
+		// Hover State.
+		// -----------------------------------------------------------------------------
 		&:hover
-			background: var(--button-hover-background)
-			border-color: var(--button-hover-border)
-			color: var(--button-hover-color)
-
-		// BUTTON ACTIVE
-		&:active, &:focus
-			background: var(--button-active-background)
-			border-color: var(--button-active-border)
-			color: var(--button-active-color)
+			@each $name, $value in $hover-variables
+				@if meta.variable-exists($name) and $value
+					@if map.has-key($variables, $name) and map.get($variables, $name)
+						--button-#{$name}: var(--button-hover-#{$name})
+					@else
+						#{$name}: var(--button-hover-#{$name})
 
 
-		// // BUTTON SECONDARY
-		// &--secondary
-		// 	background: var(--button-primary)
-		// 	border: var(--button-border) solid var(--button-primary)
-		// 	border-radius: var(--button-border-radius)
-		// 	color: var(--button-background)
-
-		// 	// BUTTON SECONDARY HOVER
-		// 	&:hover
-		// 		background: var(--button-background)
-		// 		border-color: var(--button-primary)
-		// 		color: var(--button-primary)
+		// Focus State.
+		// -----------------------------------------------------------------------------
+		&:focus
+			@each $name, $value in $focus-variables
+				@if meta.variable-exists($name) and $value
+					@if map.has-key($variables, $name) and map.get($variables, $name)
+						--button-#{$name}: var(--button-focus-#{$name})
+					@else
+						#{$name}: var(--button-focus-#{$name})
 
 
-		// 	// BUTTON SECONDARY ACTIVE
-		// 	&:active
-		// 		background: var(--button-background)
-		// 		border-color: var(--button-secondary)
-		// 		color: var(--button-secondary)
+		// Focus-visible State.
+		// -----------------------------------------------------------------------------
+		&:focus-visible
+			@each $name, $value in $focus-visible-variables
+				@if meta.variable-exists($name) and $value
+					@if map.has-key($variables, $name) and map.get($variables, $name)
+						--button-#{$name}: var(--button-focus-visible-#{$name})
+					@else
+						#{$name}: var(--button-focus-visible-#{$name})
 
 
-		// LINKS
-		@at-root a#{&}
-			// background: var(--link-background)
-			color: var(--link-color)
-			border: var(--link-border)
-			border-radius: var(--link-border-radius)
+		// Active State.
+		// -----------------------------------------------------------------------------
+		&:active
+			@each $name, $value in $active-variables
+				@if meta.variable-exists($name) and $value
+					@if map.has-key($variables, $name) and map.get($variables, $name)
+						--button-#{$name}: var(--button-active-#{$name})
+					@else
+						#{$name}: var(--button-active-#{$name})
 
 
-			// LINK FOCUS
-			&:focus
-				outline: var(--link-focus-background)
-				background: var(--link-focus-border)
-				color: var(--link-focus-color)
-
-
-			// LINK HOVER
-			&:hover
-				background: var(--link-hover-border)
-				border: var(--link-hover-border)
-				color: var(--link-hover-color)
-
-
-			// LINK ACTIVE
-			&:active
-				background: var(--link-active-border)
-				border: var(--link-active-border)
-				color: var(--link-active-color)
-
-			// // LINK SECONDARY
-			// &.button--secondary
-			// 	background: unset
-			// 	border: unset
-			// 	color: var(--button-secondary)
-
-			// 	// LINK SECONDARY HOVER
-			// 	&:hover
-			// 		border-color: var(--button-primary)
-			// 		color: var(--button-primary)
-
-
-			// 	// LINK SECONDARY ACTIVE
-			// 	&:active
-			// 		border-color: var(--button-primary)
-			// 		color: var(--button-primary)
-
-
-		// DISABLED
-		&[disabled]
-			background: var(--button-disabled-background)
-			border-color: var(--button-disabled-border)
-			color: var(--button-disabled-color)
+		// Disabled State.
+		// -----------------------------------------------------------------------------
+		&:disabled
+			@each $name, $value in $disabled-variables
+				@if meta.variable-exists($name) and $value
+					@if map.has-key($variables, $name) and map.get($variables, $name)
+						--button-#{$name}: var(--button-disabled-#{$name})
+					@else
+						#{$name}: var(--button-disabled-#{$name})
